@@ -1,0 +1,12 @@
+{
+  "dependencies": [
+    "langgraph==0.5.2"
+  ],
+  "graphs": {
+    "news_agent": {
+      "path": "./news_mastodon_agent.py:graph",
+      "description": "ニュース取得・要約・投稿を行うエージェント"
+    }
+  },
+  "env": "../.env"
+}
