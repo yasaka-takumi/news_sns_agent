@@ -1,0 +1,7 @@
+langgraph==0.5.2
+langgraph-cli
+langchain-core
+langchain-ollama
+httpx
+python-dotenv
+Mastodon.py
