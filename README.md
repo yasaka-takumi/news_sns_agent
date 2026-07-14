@@ -2,10 +2,7 @@
 
 ## 概要
 - NewsAPIからキーワードに合致する最新ニュースを取得し、ローカルLLM（Ollama）で140字以内に要約したうえでMastodonに自動投稿するAIエージェントです。「テクノロジーのニュースを取得して要約してtootして」のような自然言語の指示を与えるだけで、ニュース取得→要約→投稿までを自動で実行します。
-- LangChain/LangGraphの学習の一環として、四則演算を行うだけの最小構成のエージェント（`AI_agent_sns_news/udemy_langchain.ipynb`）から出発し、実用的なタスク（ニュース収集・SNS運用の自動化）に発展させる形で作成しました。
-
-## デモ
-（スクリーンショット・動作GIFをここに掲載予定）
+- LangChain/LangGraphの学習の一環として、四則演算を行うだけの最小構成のエージェント（`langchain.ipynb`）から出発し、実用的なタスク（ニュース収集・SNS運用の自動化）に発展させる形で作成しました。
 
 ## アーキテクチャ
 
@@ -35,10 +32,8 @@ flowchart TD
 - **HTTPクライアント**: httpx
 - **環境変数管理**: python-dotenv
 
-## 工夫した点・苦労した点
-- **Tool呼び出しループの制御**: `decide_next`関数で直近メッセージに`tool_calls`が含まれるかどうかを判定し、含まれていれば`tools_node`へ、なければ終了へ分岐させることで、1回のユーザー指示から`get_news`→`summerize`→`post_toot`という複数Toolの連鎖呼び出しを実現しました。
-- **create_agentとLangGraphの使い分け**: 最初は`create_agent`で簡易実装しましたが、内部の処理フローがブラックボックス化されるため、最終的には`StateGraph`でノードとエッジを明示的に定義し直しました（検証過程は`udemy_langchain.ipynb`に記録）。
-- **ローカルLLMの接続設定**: Ollamaのデフォルトポート（11434）ではなく`base_url="http://localhost:12000"`で待ち受ける環境だったため、接続先を明示的に指定する必要がありました。
+## 工夫した点
+- **create_agentとLangGraphの使い分け**: 最初は`create_agent`で簡易実装しましたが、内部の処理フローがブラックボックス化されるため、最終的には`StateGraph`でノードとエッジを明示的に定義し直しました（検証過程は`langchain.ipynb`に記録）。
 
 ## セットアップ方法
 ```bash
